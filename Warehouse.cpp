@@ -1,38 +1,60 @@
 #include "Warehouse.h"
 
-Warehouse::Warehouse():numBins(0),itemsPerBin(0),fetchCost(0),returnCost(0),bins(){}
+Warehouse::Warehouse():maxBins(0),fetchCost(0),returnCost(0),bins(){}
 
-void Warehouse::setBinsAndItems(const int&binCount,const int&items)
+void Warehouse::setBins(const int&binCount)
 {
-	numBins=binCount;
-	itemsPerBin=items;
-	bins=vector(binCount,vector(items,-1));
+	maxBins=binCount;
+	bins=vector<Bin>(maxBins,Bin(-1));
 }
+//base implementation (ig)
 void Warehouse::addItem(const int&it)
 {
-	int binNum=it/itemsPerBin;
-	int itemIndex=it%itemsPerBin;
-	bins[binNum][itemIndex]=it;
+	int binModifyIndex=-1;
+	int index=it/10;
+	//first find existing bin, if none add
+	for(int i=0;i<maxBins;i++)
+	{
+		if(bins[i].num==index)
+		{
+			binModifyIndex=i;
+			goto setBin;
+		}
+	}
+	//not found
+	for(int i=0;i<maxBins;i++)
+	{
+		if(bins[i].num==EMPTY)
+		{
+			//fetch
+			binModifyIndex=i;
+			goto setBin;
+		}
+	}
+	//no empty space
+	//assume return first bin for now
+	//return
+	
+	binModifyIndex=0;
+	bins[binModifyIndex].clearBin();
+setBin:
+	bins[binModifyIndex].num=index;
+	bins[binModifyIndex].addItem(it);
 }
+
 void Warehouse::setCosts(const float&fetch,const float&returnC)
 {
 	fetchCost=fetch;
 	returnCost=returnC;
 }
+
 ostream&operator<<(ostream&os,const Warehouse&warhouse)
 {
-	int n=warhouse.numBins;
-	int nI=warhouse.itemsPerBin;
+	int n=warhouse.maxBins;
 	os<<"FetchCost: $"<<fixed<<setw(3)<<setprecision(2)<<warhouse.fetchCost<<
 			fixed<<endl<<"ReturnCost: $"<<fixed<<setw(3)<<setprecision(2)<<warhouse.returnCost<<endl;
-	for(int i=0;i<n;i++)
-	{
-		os<<"Bin "<<i<<": [";
-		for(int j=0;j<nI;j++)
-		{
-			os<<warhouse.bins[i][j]<<(j==n-1?"":", ");
-		}
-		os<<"]"<<endl;
-	}
+	cout<<"Bins:["<<endl;
+	for(int i=0;i<n;i++)os<<warhouse.bins[i];
+	cout<<"]"<<endl;
 	return os;
 }

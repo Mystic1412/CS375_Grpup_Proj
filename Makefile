@@ -1,16 +1,41 @@
-CC=g++
-CFLAGS=-Wall -DBSD -DNDDEBUG
-TARGET=warehouse
-OFiles=warehouse.o
-CPPFiles=MainInput.cpp Warehouse.cpp Warehouse.h
+INPUTS := inputs/inputs.txt
+OUTPUTS := inputs/fifo.txt inputs/lfu.txt inputs/lru.txt
 
-all:$(TARGET) run
+#######################################
+# Compiler and flags
+CXX = g++
+CXXFLAGS = -std=c++11 -Wall -Wextra -g
 
-run:
-	./$(TARGET) inputs/input.txt inputs/output.txt
-$(TARGET):$(OFiles)
-	$(CC) $(CFLAGS) -o $@ $(OFiles)
-$(OFiles): $(CPPFiles)
-	$(CC) $(CFLAGS) -c $*.cpp
+# Target executable
+TARGET = warehouse
+
+# Source files
+SRC = Main.cpp Warehouse.cpp FirstFit.cpp FirstFitDecreasing.cpp LeastFrequentlyUsed.cpp
+HEADERS = Warehouse.h
+
+# Object files
+OBJ = $(SRC:.cpp=.o)
+
+# Default rule
+all: clear $(TARGET)
+
+# Link executable
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
+
+# Compile objects
+%.o: %.cpp $(HEADERS)
+	@echo "Compiling $<..."
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean
 clean:
-	rm -rf *.o $(TARGET)
+	rm -f $(OBJ) $(TARGET).exe $(TARGET)
+
+# Clear terminal
+clear:
+	clear
+
+# Run
+run: $(TARGET)
+	./$(TARGET) $(INPUTS) $(OUTPUTS)

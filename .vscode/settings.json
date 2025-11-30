@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "vector": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "iterator": "cpp",
+        "xhash": "cpp",
+        "xutility": "cpp",
+        "algorithm": "cpp",
+        "format": "cpp",
+        "queue": "cpp",
+        "fstream": "cpp",
+        "unordered_map": "cpp"
+    }
+}
