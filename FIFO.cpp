@@ -1,11 +1,9 @@
-/*
-Nichole
-*/
+//Nichole
 #include "Warehouse.h"
 #include <queue>
 #include <unordered_map>
 
-
+/*
 class FIFOWarehouse : public Warehouse
 {
     public:
@@ -14,6 +12,7 @@ class FIFOWarehouse : public Warehouse
         //
     }
 };
+*/
 inline void FIFO(ofstream&output,const vector<int>&items,const int&binSize,const float&fetchCost,const float&returnCost){
     int totalslotused = 0;
     float totalCost=0;
@@ -47,12 +46,12 @@ inline void FIFO(ofstream&output,const vector<int>&items,const int&binSize,const
             totalslotused += slotsize; //keeping track of how much room on the table is used
             totalCost += fetchCost*slotsize;
         }
-        cout<<"Current Table: ";
+        output<<"Current Table: ";
         for(auto x = Ontable.begin(); x != Ontable.end(); x++){
-            cout<< x->first<<" ";
+            output<< x->first;output<<" ";
         }
-        cout<<endl;
+        output<<endl;
     }
     
-    cout<<"\nTotal Cost: "<<totalCost<<endl;
+    output<<"\nTotal Cost: "<<totalCost<<endl;
 }

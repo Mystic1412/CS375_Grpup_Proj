@@ -5,8 +5,8 @@
 		search through bins for existing index
 		if found add item to that bin (no fetching / returning needed)
 		else
-  	  	  if no space for new bin, remove random bin and fetch new bin
-  	  	  else fetch bin
+  	  	  if no space for new bin, remove random bin until able to fetch new bin
+  	  	  else fetch new bin
  */
 #include <iostream>
 #include <cmath>
@@ -29,28 +29,20 @@ inline void RandomlyUsed(ofstream&output,const vector<int>&items,const int&binSi
 			if(bins[i]==numBins)continue;//found bin
 		//specified bin size not found
 		//remainder from total
-		int remainder=binSize-currBinSum;
-		//cout<<"Add:"<<numBins<<",OldRemainder:"<<remainder<<endl;
-		if(remainder<=0)//if no space left for new bin
+		while(currBinSum+numBins>binSize)//while no space left for new slots, remove random
 		{
-			int removeSum=0;
-			while(removeSum<numBins)
-			{
-				//randomly remove bins
-				int index=rand()%currNumBins;
-				int removeBinVal=bins[index];
-				currBinSum-=removeBinVal;
-				removeSum+=removeBinVal;
-				bins.erase(bins.begin()+index);
-				totalCost+=returnCost;
-				//cout<<"CurrBinSum: "<<currBinSum<<",::Remainder:"<<remainder<<endl;
-			}
+			//randomly remove bins
+			int index=rand()%currNumBins;
+			int removeBinVal=bins[index];
+			currBinSum-=removeBinVal;
+			bins.erase(bins.begin()+index);
+			totalCost+=returnCost*removeBinVal;
 		}
+		//push bin
 		bins.push_back(numBins);
 		currBinSum+=numBins;
-		//cout<<"NewRemainder:"<<(binSize-currBinSum)<<endl;
 		totalCost+=fetchCost;
-		cout<<"Current Table: ";for(auto x:bins)cout<< x<<" ";cout<<endl;
+		output<<"Current Table: ";for(auto x:bins)output<< x<<" ";output<<endl;
 	}
-	cout<<"TotalCost: "<<totalCost<<endl;
+	output<<"TotalCost: "<<totalCost<<endl;
 }

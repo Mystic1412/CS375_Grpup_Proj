@@ -1,5 +1,5 @@
 /*
-Victor
+Victor is slacking
 */
 
 #include "Warehouse.h"
@@ -35,15 +35,14 @@ inline void LeastRecentlyUsed(ofstream&output,const vector<int>&items,const int&
         // cost += returnSize    
 
     vector<int> frequecy;
-    //victors fault
     unordered_set<int> table; // holds size which means bin at the index holds size
     int tableSize = 0;
 
     for (int i = 0; i < (int)items.size(); i++) {
-        itemBinSize = floor(log10(items[i]));
+        int itemBinSize = floor(log10(items[i]));
 
-        for(int j = 0; j < (int) freq.size();j++) {
-            items[i] 
+        for(int j = 0; j < (int) frequecy.size();j++) {
+            items[i];
         }
     }
 
