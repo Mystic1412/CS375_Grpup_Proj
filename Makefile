@@ -4,7 +4,7 @@ OUTPUTS := inputs/fifo.txt inputs/lru.txt inputs/rand.txt
 #######################################
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra -g
+CXXFLAGS = -std=c++17 -Wall -Wextra -g
 
 # Target executable
 TARGET = warehouse
@@ -30,7 +30,7 @@ $(TARGET): $(OBJ)
 
 # Clean
 clean:
-	rm -f $(OBJ) $(TARGET).exe $(TARGET)
+	rm -f $(OBJ) $(TARGET).exe $(TARGET) $(OUTPUTS)
 
 # Clear terminal
 clear:
