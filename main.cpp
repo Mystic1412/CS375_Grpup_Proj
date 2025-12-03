@@ -59,6 +59,7 @@ int main(int argv,char**argc)
 		evaluate("Time: ",FIFO," ms",fifo,items,binNum,fetchCost,returnCost);
 		//LRU
 		evaluate("Time: ",LeastRecentlyUsed," ms",lru,items,binNum,fetchCost,returnCost);
+ 		//cout<<"RNADN"<<endl;
 		//Random
 		evaluate("Time: ",RandomlyUsed," ms",rand,items,binNum,fetchCost,returnCost);
 		fifo.close();

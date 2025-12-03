@@ -45,11 +45,13 @@ inline void LeastRecentlyUsed(ofstream&output,const vector<int>&items,const int&
         // Sets current items binSize
         bool placed = false;
         int binIndex = floor(items[i]/10);
-        int currBinSize = floor(log10(items[i]));
+        //output << items[i] << endl;
+        int currBinSize = (floor(log10(items[i])))+1;
+        //output << currBinSize << endl;
 
-        if (currBinSize < 1) {
-            currBinSize = 1;
-        }
+        // if (currBinSize < 1) {
+        //     currBinSize = 1;
+        // }
 
         for (int tableItems = 0; tableItems < (int)onTable.size(); tableItems++) {
             if (binIndex == onTable[tableItems]) {
@@ -80,6 +82,7 @@ inline void LeastRecentlyUsed(ofstream&output,const vector<int>&items,const int&
                     while (tableSize + currBinSize > maxTableSize) {
                         int minFreqBin = onTable[0];
                         int index = 0;
+                    
                         for (int j = 0; j < (int)onTable.size(); j++) {
                             if (freq[onTable[j]] < freq[minFreqBin]) {
                                 minFreqBin = onTable[j];
@@ -87,15 +90,29 @@ inline void LeastRecentlyUsed(ofstream&output,const vector<int>&items,const int&
                             }
                         }
 
-                        int minFreqBinSize = floor(log10(minFreqBin * 10));
-
-                        if (minFreqBinSize < 1) {
+                        // output << minFreqBin << endl;
+                        int minFreqBinSize = 0;
+                        if (minFreqBin == 0) {
                             minFreqBinSize = 1;
+                        } else {
+                            minFreqBinSize = (floor(log10(onTable[index] * 10)));
+
+                            if (minFreqBinSize < 1) {
+                                minFreqBinSize = 1;
+                            } else {
+                                minFreqBinSize = minFreqBinSize + 1;
+                            }
                         }
+    
+                        // output << minFreqBinSize << endl;
+
+                        // if (minFreqBinSize < 1) {
+                        //     minFreqBinSize = 1;
+                        // }
 
                         tableSize = tableSize - minFreqBinSize;
                         totalCosts = totalCosts + minFreqBinSize*returnCost;
-                        output << " -REMOVED: Bin " << minFreqBin << " (size " << minFreqBinSize << ")" << endl;
+                        //output << " -REMOVED: Bin " << minFreqBin << " (size " << minFreqBinSize << ")" << endl;
 
                         onTable.erase(onTable.begin() + index);
                     }
@@ -127,8 +144,8 @@ inline void LeastRecentlyUsed(ofstream&output,const vector<int>&items,const int&
         }
 
         // Debug output
-        output << "Item: " << items[i] << " | Bin Index: " << binIndex << " | Size: " << currBinSize;
-        output << " | Table size: " << tableSize << " | Total cost: " << totalCosts << endl;
+        //output << "Item: " << items[i] << " | Bin Index: " << binIndex << " | Size: " << currBinSize;
+        //output << " | Table size: " << tableSize << " | Total cost: " << totalCosts << endl;
     }
 
     output << "Final total cost: " << totalCosts << endl;

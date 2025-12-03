@@ -1,4 +1,4 @@
-INPUTS := inputs/inputs.txt
+INPUTS := inputs/small_inputs.txt
 OUTPUTS := inputs/fifo.txt inputs/lru.txt inputs/rand.txt
 
 #######################################
@@ -10,14 +10,14 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -g
 TARGET = warehouse
 
 # Source files
-SRC = Main.cpp Warehouse.cpp FIFO.cpp LeastRecentlyUsed.cpp RandomlyUsed.cpp
+SRC = main.cpp Warehouse.cpp FIFO.cpp LeastRecentlyUsed.cpp RandomlyUsed.cpp
 HEADERS = Warehouse.h
 
 # Object files
 OBJ = $(SRC:.cpp=.o)
 
 # Default rule
-all: clear $(TARGET)
+all: clean $(TARGET) clear run
 
 # Link executable
 $(TARGET): $(OBJ)
