@@ -6,7 +6,7 @@
 #include <chrono>
 
 #include "FIFO.cpp"
-#include "LeastRecentlyUsed.cpp"
+#include "LeastFrequentlyUsed.cpp"
 #include "RandomlyUsed.cpp"
 using namespace std;
 using namespace chrono;

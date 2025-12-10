@@ -1,5 +1,5 @@
-INPUTS := inputs/small_inputs.txt
-OUTPUTS := inputs/fifo.txt inputs/lru.txt inputs/rand.txt
+INPUTS := inputs/Large_inputs.txt
+OUTPUTS := inputs/fifo.txt inputs/lfu.txt inputs/rand.txt
 
 #######################################
 # Compiler and flags
@@ -10,7 +10,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -g
 TARGET = warehouse
 
 # Source files
-SRC = main.cpp Warehouse.cpp FIFO.cpp LeastRecentlyUsed.cpp RandomlyUsed.cpp
+SRC = main.cpp Warehouse.cpp FIFO.cpp LeastFrequentlyUsed.cpp RandomlyUsed.cpp
 HEADERS = Warehouse.h
 
 # Object files
