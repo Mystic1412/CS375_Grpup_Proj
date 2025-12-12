@@ -10,8 +10,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -g
 TARGET = warehouse
 
 # Source files
-SRC = main.cpp Warehouse.cpp FIFO.cpp LeastFrequentlyUsed.cpp RandomlyUsed.cpp
-HEADERS = Warehouse.h
+SRC = main.cpp FIFO.cpp LeastFrequentlyUsed.cpp RandomlyUsed.cpp
 
 # Object files
 OBJ = $(SRC:.cpp=.o)

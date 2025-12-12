@@ -7,7 +7,6 @@
 - Makefile - builds the program into an executable named "submission" and runs it
 - Large_inptus.txt small_inputs.txt - a sample for problem 1 without spaces inbetween
 - fifo.txt lfu.txt rand.txt - generated output file for each algorithm custom input files
-- Warehouse.cpp Warehouse.h - what we started with but we don't need it
 ## How to Run
 - make - compile the program
 - make run - runs program and output the results into an output file for each algorithm

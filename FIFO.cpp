@@ -1,8 +1,10 @@
 //Nichole
-#include "Warehouse.h"
+#include <iostream>
 #include <queue>
 #include <unordered_map>
 #include <fstream>
+#include <cmath>
+using namespace std;
 
 inline void FIFO(ofstream&output,const vector<int>&items,const int&binSize,const float&fetchCost,const float&returnCost){
     int totalslotused = 0;
